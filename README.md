@@ -1,5 +1,7 @@
 # ClaudeCheck
 
+![A developer happily sipping a cocktail on a beach chair while the laptop on his lap shows a sleeping robot — Claude is down, he's fine](Resources/preview.jpg)
+
 > You've been yelling at Opus for an hour thinking it got lobotomized overnight.
 > Turns out it was just down. A tiny dot in your menu bar could have saved you.
 > Green = it's you. Red = it's them. Go touch grass either way.
@@ -50,6 +52,14 @@ Click the icon → the system Settings window (`⌘,`) has the knobs:
 - **Launch at login**.
 
 All off by default. No telemetry, no account, no network calls beyond the Statuspage URL.
+
+## Uninstall
+
+```sh
+brew uninstall --cask claude-check
+```
+
+Or drag `ClaudeCheck.app` to the Trash. The cask's `zap` also removes the preferences plist — otherwise delete `~/Library/Preferences/com.androsovm.ClaudeCheck.plist` by hand.
 
 ## Build from source
 

@@ -83,7 +83,8 @@ branding" rather than a warning.
 - `Info.plist` has `__VERSION__` placeholders that `build-app.sh` substitutes with `sed`.
 - CI: `.github/workflows/release.yml` fires on `v*` tags → builds universal zip,
   creates a GitHub Release, then bumps `Casks/claude-check.rb` in the
-  `androsovm/homebrew-tap` repo (version + sha256) if `HOMEBREW_TAP_TOKEN` is set.
+  `androsovm/homebrew-tap` repo (version + sha256). `HOMEBREW_TAP_TOKEN`
+  secret is set; first working release was `v0.1.0` on 2026-04-17.
 - Distribution: `brew install --cask androsovm/tap/claude-check`. Cask
   `postflight` strips quarantine because we don't have a Developer ID
   (ad-hoc signed, not notarized).
