@@ -42,6 +42,10 @@ struct MenuContent: View {
             openURL(URL(string: "https://status.claude.com")!)
         }
 
+        Button("Suggest improvement / feedback") {
+            openURL(URL(string: "https://github.com/androsovm/ClaudeCheck/issues")!)
+        }
+
         Divider()
 
         Button("Quit ClaudeCheck") {
