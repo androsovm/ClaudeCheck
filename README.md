@@ -1,6 +1,6 @@
 # ClaudeCheck
 
-![A developer happily sipping a cocktail on a beach chair while the laptop on his lap shows a sleeping robot — Claude is down, he's fine](Resources/preview.jpg)
+![Screenshot of ClaudeCheck's menu bar dropdown during a real Claude outage: red icon, "Claude Code is down — you're allowed to live a little", both Claude API and Claude Code marked as Major Outage](Resources/Screenshot.png)
 
 > You've been yelling at Opus for an hour thinking it got lobotomized overnight.
 > Turns out it was just down. A tiny dot in your menu bar could have saved you.
