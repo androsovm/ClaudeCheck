@@ -8,6 +8,10 @@
 	<string>ClaudeCheck</string>
 	<key>CFBundleExecutable</key>
 	<string>ClaudeCheck</string>
+	<key>CFBundleIconFile</key>
+	<string>AppIcon</string>
+	<key>CFBundleIconName</key>
+	<string>AppIcon</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.androsovm.ClaudeCheck</string>
 	<key>CFBundleInfoDictionaryVersion</key>
