@@ -20,6 +20,11 @@ final class StatusPoller: ObservableObject {
     /// state without waiting for a real outage. Flip off before shipping.
     static let debugCycleSeverities = false
 
+    /// When true, skip real polling and pin the app to a fake "Claude is
+    /// down" state with both monitored components marked as major outage
+    /// plus a synthetic incident — for screenshots. Flip off before shipping.
+    static let debugForceDown = false
+
     @Published private(set) var summary: StatusSummary?
     @Published private(set) var lastUpdated: Date?
     @Published private(set) var lastError: String?
@@ -43,6 +48,13 @@ final class StatusPoller: ObservableObject {
                     try? await Task.sleep(for: .seconds(5))
                 }
             }
+            return
+        }
+        if Self.debugForceDown {
+            self.summary = Self.fakeDownSummary()
+            self.severity = .down
+            self.lastUpdated = Date()
+            self.lastError = nil
             return
         }
         pollTask = Task { [weak self] in
@@ -148,6 +160,29 @@ final class StatusPoller: ObservableObject {
             return Self.severity(fromIndicator: summary.status.indicator)
         }
         return monitored.map(\.status.severity).max() ?? .ok
+    }
+
+    private static func fakeDownSummary() -> StatusSummary {
+        let components = [
+            Component(id: "fake-api", name: "Claude API", status: .majorOutage, position: 1),
+            Component(id: "fake-code", name: "Claude Code", status: .majorOutage, position: 2)
+        ]
+        let incident = Incident(
+            id: "fake-incident",
+            name: "Elevated errors on Claude API and Claude Code",
+            status: "investigating",
+            impact: .critical,
+            shortlink: "https://status.claude.com",
+            componentIds: ["fake-api", "fake-code"],
+            components: nil
+        )
+        return StatusSummary(
+            page: .init(id: "fake", name: "Anthropic", url: "https://status.claude.com", updatedAt: ""),
+            components: components,
+            incidents: [incident],
+            scheduledMaintenances: [],
+            status: .init(indicator: "critical", description: "Major System Outage")
+        )
     }
 
     static func severity(fromIndicator indicator: String) -> Severity {
